@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Page from './layout/Page';
+import ColorContext from './contexts/ColorContext';
 
-function App() {
+const App = () => {
+  // gọi API để lấy mã màu ()
+  const [color, setColor] = useState({
+    header: 'red',
+    body: 'purple',
+    footer: 'pink',
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ColorContext.Provider
+        value={{ color: color, 
+          onChangeBackground: setColor }}
+      >
+        <Page />
+      </ColorContext.Provider>
     </div>
   );
-}
+};
 
 export default App;
